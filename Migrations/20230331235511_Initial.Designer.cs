@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessApi.Migrations
 {
     [DbContext(typeof(BusinessApiContext))]
-    [Migration("20230326234118_RequireModelValidations")]
-    partial class RequireModelValidations
+    [Migration("20230331235511_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,7 @@ namespace BusinessApi.Migrations
 
                     b.HasKey("BusinessId");
 
-                    b.ToTable("Businesss");
+                    b.ToTable("Businesses");
 
                     b.HasData(
                         new

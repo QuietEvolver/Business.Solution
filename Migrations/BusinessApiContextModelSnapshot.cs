@@ -38,7 +38,7 @@ namespace BusinessApi.Migrations
 
                     b.HasKey("BusinessId");
 
-                    b.ToTable("Businesss");
+                    b.ToTable("Businesses");
 
                     b.HasData(
                         new
