@@ -1,4 +1,4 @@
-using CretaceousApi.Models;
+using BusinessApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +11,8 @@ builder.Services.AddControllers();
 // builder.Services.AddControllersWithViews();
 
 
-//Updating Program.cs to Use MySQL and the CretaceousApiContext
-builder.Services.AddDbContext<CretaceousApiContext>(
+//Updating Program.cs to Use MySQL and the BusinessApiContext
+builder.Services.AddDbContext<BusinessApiContext>(
                     DbContextOptions => DbContextOptions
                     .UseMySql(
                         builder.Configuration["ConnectionStrings:DefaultConnection"],

@@ -22,7 +22,7 @@ namespace CretaceousApi.Controllers
         }
 
         // Pagination: https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0
-       /* public async Task<IActionResult> Index(string sortOrder)
+        /* public async Task<IActionResult> Index(string sortOrder)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["AgeSortParm"] = sortOrder == "Age" ? "age_desc" : "Age";
