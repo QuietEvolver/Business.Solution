@@ -12,11 +12,11 @@ namespace BusinessApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinesssController : ControllerBase
+    public class BusinessesController : ControllerBase
     {
         private readonly BusinessApiContext _context;
 
-        public BusinesssController(BusinessApiContext context)
+        public BusinessesController(BusinessApiContext context)
         {
             _context = context;
         }
@@ -25,7 +25,7 @@ namespace BusinessApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Business>> Get(int pageNumber = 1, int resultsPerPage = 2)
         {
-            var query = _context.Businesss.OrderBy(x => x.BusinessId);
+            var query = _context.Businesses.OrderBy(x => x.BusinessId);
             var totalResultCount = query.Count();
             var items = query.Skip((pageNumber - 1) * resultsPerPage).Take(resultsPerPage).ToList();
             var totalPages = (int)Math.Ceiling((double)totalResultCount / resultsPerPage);
@@ -45,7 +45,7 @@ namespace BusinessApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Business>>> Get( string species, string name, int minimumAge) 
         {
-            IQueryable<Business> query = _context.Businesss.AsQueryable();
+            IQueryable<Business> query = _context.Businesses.AsQueryable();
             if ( species != null)
             {
                 query = query.Where(entry => entry.Species == species);
@@ -64,7 +64,7 @@ namespace BusinessApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Business>> GetBusiness(int id)
         {
-            var business = await _context.Businesss.FindAsync(id);
+            var business = await _context.Businesses.FindAsync(id);
 
             if (business == null)
             {
@@ -106,7 +106,7 @@ namespace BusinessApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Business>> PostBusiness(Business business)
         {
-            _context.Businesss.Add(business);
+            _context.Businesses.Add(business);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
@@ -115,13 +115,13 @@ namespace BusinessApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBusiness(int id)
         {
-            var business = await _context.Businesss.FindAsync(id);
+            var business = await _context.Businesses.FindAsync(id);
             if (business == null)
             {
                 return NotFound();
             }
 
-            _context.Businesss.Remove(business);
+            _context.Businesses.Remove(business);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -129,7 +129,7 @@ namespace BusinessApi.Controllers
 
         private bool BusinessExists(int id)
         {
-            return _context.Businesss.Any(e => e.BusinessId == id);
+            return _context.Businesses.Any(e => e.BusinessId == id);
         }
     }
 }
