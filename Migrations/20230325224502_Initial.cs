@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CretaceousApi.Migrations
+namespace BusinessApi.Migrations
 {
     public partial class Initial : Migration
     {
@@ -13,10 +13,10 @@ namespace CretaceousApi.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Animals",
+                name: "Businesss",
                 columns: table => new
                 {
-                    AnimalId = table.Column<int>(type: "int", nullable: false)
+                    BusinessId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -26,7 +26,7 @@ namespace CretaceousApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Animals", x => x.AnimalId);
+                    table.PrimaryKey("PK_Businesss", x => x.BusinessId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
         }
@@ -34,7 +34,7 @@ namespace CretaceousApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Animals");
+                name: "Businesss");
         }
     }
 }

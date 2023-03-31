@@ -2,14 +2,14 @@
 
 #nullable disable
 
-namespace CretaceousApi.Migrations
+namespace BusinessApi.Migrations
 {
     public partial class RequireModelValidations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.UpdateData(
-                table: "Animals",
+                table: "Businesss",
                 keyColumn: "Species",
                 keyValue: null,
                 column: "Species",
@@ -17,7 +17,7 @@ namespace CretaceousApi.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "Species",
-                table: "Animals",
+                table: "Businesss",
                 type: "longtext",
                 nullable: false,
                 oldClrType: typeof(string),
@@ -27,7 +27,7 @@ namespace CretaceousApi.Migrations
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.UpdateData(
-                table: "Animals",
+                table: "Businesss",
                 keyColumn: "Name",
                 keyValue: null,
                 column: "Name",
@@ -35,7 +35,7 @@ namespace CretaceousApi.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
-                table: "Animals",
+                table: "Businesss",
                 type: "varchar(20)",
                 maxLength: 20,
                 nullable: false,
@@ -50,7 +50,7 @@ namespace CretaceousApi.Migrations
         {
             migrationBuilder.AlterColumn<string>(
                 name: "Species",
-                table: "Animals",
+                table: "Businesss",
                 type: "longtext",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -60,7 +60,7 @@ namespace CretaceousApi.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
-                table: "Animals",
+                table: "Businesss",
                 type: "longtext",
                 nullable: true,
                 oldClrType: typeof(string),

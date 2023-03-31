@@ -2,15 +2,15 @@
 
 #nullable disable
 
-namespace CretaceousApi.Migrations
+namespace BusinessApi.Migrations
 {
     public partial class SeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
-                table: "Animals",
-                columns: new[] { "AnimalId", "Age", "Name", "Species" },
+                table: "Businesss",
+                columns: new[] { "BusinessId", "Age", "Name", "Species" },
                 values: new object[,]
                 {
                     { 1, 7, "Matilda", "Wooly Mammoth" },
@@ -24,28 +24,28 @@ namespace CretaceousApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
-                table: "Animals",
-                keyColumn: "AnimalId",
+                table: "Businesss",
+                keyColumn: "BusinessId",
                 keyValue: 1);
 
             migrationBuilder.DeleteData(
-                table: "Animals",
-                keyColumn: "AnimalId",
+                table: "Businesss",
+                keyColumn: "BusinessId",
                 keyValue: 2);
 
             migrationBuilder.DeleteData(
-                table: "Animals",
-                keyColumn: "AnimalId",
+                table: "Businesss",
+                keyColumn: "BusinessId",
                 keyValue: 3);
 
             migrationBuilder.DeleteData(
-                table: "Animals",
-                keyColumn: "AnimalId",
+                table: "Businesss",
+                keyColumn: "BusinessId",
                 keyValue: 4);
 
             migrationBuilder.DeleteData(
-                table: "Animals",
-                keyColumn: "AnimalId",
+                table: "Businesss",
+                keyColumn: "BusinessId",
                 keyValue: 5);
         }
     }
