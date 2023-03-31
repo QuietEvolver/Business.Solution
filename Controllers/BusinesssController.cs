@@ -5,56 +5,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CretaceousApi.Models;
+using BusinessApi.Models;
 using Newtonsoft.Json;
 
-namespace CretaceousApi.Controllers
+namespace BusinessApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AnimalsController : ControllerBase
+    public class BusinesssController : ControllerBase
     {
-        private readonly CretaceousApiContext _context;
+        private readonly BusinessApiContext _context;
 
-        public AnimalsController(CretaceousApiContext context)
+        public BusinesssController(BusinessApiContext context)
         {
             _context = context;
         }
 
-        // Pagination: https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0
-        /* public async Task<IActionResult> Index(string sortOrder)
-        {
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["AgeSortParm"] = sortOrder == "Age" ? "age_desc" : "Age";
-            var animals = from ani in _context.Animals
-                        select ani; // NOTE! rebuilt FKA: _db = db; 
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    animals = animals.OrderByDescending(ani => ani.Name);
-                    break;
-                case "Age":
-                    animals = animals.OrderBy(ani => ani.Age);
-                    break;
-                case "age_desc":
-                    animals = animals.OrderByDescending(ani => ani.Age);
-                    break;
-                default:
-                    animals = animals.OrderBy(ani => ani.Name);
-                    break;
-            }
-            return View(await animals.AsNoTracking().ToListAsync());
-        }*/
-
         [Route("api/tryjson")]
         [HttpGet]
-        public ActionResult<IEnumerable<Animal>> Get(int pageNumber = 1, int resultsPerPage = 2)
+        public ActionResult<IEnumerable<Business>> Get(int pageNumber = 1, int resultsPerPage = 2)
         {
-            var query = _context.Animals.OrderBy(x => x.AnimalId);
+            var query = _context.Businesss.OrderBy(x => x.BusinessId);
             var totalResultCount = query.Count();
             var items = query.Skip((pageNumber - 1) * resultsPerPage).Take(resultsPerPage).ToList();
             var totalPages = (int)Math.Ceiling((double)totalResultCount / resultsPerPage);
-            // $ dotnet add package Newtonsoft.Json --version 13.0.1 (v.2021)
             var metadata = new
             {
                 totalResultCount,
@@ -64,63 +38,51 @@ namespace CretaceousApi.Controllers
             };
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
             return items.ToList();
-           
         }
 
 
         // GET: api/Animals
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Animal>>> Get( string species, string name, int minimumAge) //, int pageNumber = 1, int resultsPerPage = 2) //[FromQuery] // update params to handle query// & add'l q = name // [Range]: int minimumAge
+        public async Task<ActionResult<IEnumerable<Business>>> Get( string species, string name, int minimumAge) 
         {
-        // add search parameters to our Get() controller action so that we can request and retrieve filtered data.
-        // http://localhost:5000/api/animals?species=dinosaur
-            IQueryable<Animal> query = _context.Animals.AsQueryable();
+            IQueryable<Business> query = _context.Businesss.AsQueryable();
             if ( species != null)
             {
                 query = query.Where(entry => entry.Species == species);
             }
-            // param: string name && q = name
             if ( name != null)
             {
-                query = query.Where(entry => entry.Name == name); // http://localhost:5000/api/animals?species=dinosaur&name=matilda
+                query = query.Where(entry => entry.Name == name);
             }
-            // [Range=
-            // ie. http://localhost:5000/api/animals?minimumAge=5
             if (minimumAge > 0)
             {
                 query =  query.Where(entry => entry.Age >= minimumAge);
             }
-        
-        // public async Task<ActionResult<IEnumerable<Animal>>> GetAnimals()
-        // {
             return await query.ToListAsync();
         }
-
-        // GET: api/Animals/5
+ 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Animal>> GetAnimal(int id)
+        public async Task<ActionResult<Business>> GetBusiness(int id)
         {
-            var animal = await _context.Animals.FindAsync(id);
+            var business = await _context.Businesss.FindAsync(id);
 
-            if (animal == null)
+            if (business == null)
             {
                 return NotFound();
             }
 
-            return animal;
+            return business;
         }
 
-        // PUT: api/Animals/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAnimal(int id, Animal animal)
+        public async Task<IActionResult> PutBusiness(int id, Business business)
         {
-            if (id != animal.AnimalId)
+            if (id != business.BusinessId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(animal).State = EntityState.Modified;
+            _context.Entry(business).State = EntityState.Modified;
 
             try
             {
@@ -128,7 +90,7 @@ namespace CretaceousApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AnimalExists(id))
+                if (!BusinessExists(id))
                 {
                     return NotFound();
                 }
@@ -141,36 +103,33 @@ namespace CretaceousApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Animals
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Animal>> PostAnimal(Animal animal)
+        public async Task<ActionResult<Business>> PostBusiness(Business business)
         {
-            _context.Animals.Add(animal);
+            _context.Businesss.Add(business);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAnimal", new { id = animal.AnimalId }, animal);
+            return CreatedAtAction("GetBusiness", new { id = business.BusinessId }, business);
         }
 
-        // DELETE: api/Animals/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAnimal(int id)
+        public async Task<IActionResult> DeleteBusiness(int id)
         {
-            var animal = await _context.Animals.FindAsync(id);
-            if (animal == null)
+            var business = await _context.Businesss.FindAsync(id);
+            if (business == null)
             {
                 return NotFound();
             }
 
-            _context.Animals.Remove(animal);
+            _context.Businesss.Remove(business);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AnimalExists(int id)
+        private bool BusinessExists(int id)
         {
-            return _context.Animals.Any(e => e.AnimalId == id);
+            return _context.Businesss.Any(e => e.BusinessId == id);
         }
     }
 }
