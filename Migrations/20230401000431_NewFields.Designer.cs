@@ -2,6 +2,7 @@
 using BusinessApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessApi.Migrations
 {
     [DbContext(typeof(BusinessApiContext))]
-    partial class BusinessApiContextModelSnapshot : ModelSnapshot
+    [Migration("20230401000431_NewFields")]
+    partial class NewFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,36 +46,36 @@ namespace BusinessApi.Migrations
                         new
                         {
                             BusinessId = 1,
-                            Name = "Matilda's Bistro",
-                            Type = "Restaurant",
+                            Name = "Matilda",
+                            Type = "Wooly Mammoth",
                             YearsInBusiness = 7
                         },
                         new
                         {
                             BusinessId = 2,
-                            Name = "Rexi Teacups",
-                            Type = "Shop",
+                            Name = "Rexi",
+                            Type = "Dinosaur",
                             YearsInBusiness = 10
                         },
                         new
                         {
                             BusinessId = 3,
-                            Name = "Matilda Toys",
-                            Type = "Shop",
+                            Name = "Matilda",
+                            Type = "Dinosaur",
                             YearsInBusiness = 2
                         },
                         new
                         {
                             BusinessId = 4,
-                            Name = "Pip's Pizza & Brew",
-                            Type = "Restaurant",
+                            Name = "Pip",
+                            Type = "Shark",
                             YearsInBusiness = 4
                         },
                         new
                         {
                             BusinessId = 5,
-                            Name = "Bartholomew Pet Shop",
-                            Type = "Shop",
+                            Name = "Bartholomew",
+                            Type = "Dinosaur",
                             YearsInBusiness = 22
                         });
                 });
