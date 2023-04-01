@@ -43,20 +43,20 @@ namespace BusinessApi.Controllers
 
         // GET: api/Animals
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Business>>> Get( string species, string name, int minimumAge) 
+        public async Task<ActionResult<IEnumerable<Business>>> Get( string type, string name, int minimumYearsInBusiness) 
         {
             IQueryable<Business> query = _context.Businesses.AsQueryable();
-            if ( species != null)
+            if ( type != null)
             {
-                query = query.Where(entry => entry.Species == species);
+                query = query.Where(entry => entry.Type == type);
             }
             if ( name != null)
             {
                 query = query.Where(entry => entry.Name == name);
             }
-            if (minimumAge > 0)
+            if (minimumYearsInBusiness > 0)
             {
-                query =  query.Where(entry => entry.Age >= minimumAge);
+                query =  query.Where(entry => entry.YearsInBusiness >= minimumYearsInBusiness);
             }
             return await query.ToListAsync();
         }

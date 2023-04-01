@@ -31,12 +31,12 @@ Document our API's endpoints, make sure we consider what is in our API. For exam
 * Some endpoints include optional query strings that we'll want to document.
 * Some endpoints require a body to be included along with the request.
 <br> 
-GET http://localhost:5133/api/tryjson/  (*pagination)<br> 
-GET http://localhost:5133/api/businesses/<br> 
-GET http://localhost:5133/api/businesses/{id}<br> 
-POST http://localhost:5133/api/businesses/<br> 
-PUT http://localhost:5133/api/businesses/{id}<br> 
-DELETE http://localhost:5133/api/businesses/{id}<br> 
+GET http://localhost:5155/api/tryjson/  (*pagination)<br> 
+GET http://localhost:5155/api/businesses/<br> 
+GET http://localhost:5155/api/businesses/{id}<br> 
+POST http://localhost:5155/api/businesses/<br> 
+PUT http://localhost:5155/api/businesses/{id}<br> 
+DELETE http://localhost:5155/api/businesses/{id}<br> 
 
 Note: The {id} in the URL is a variable and it should be replaced with the id number of the business the user wants to GET, PUT, or DELETE.
 
@@ -45,21 +45,21 @@ resultsPerPage	| int	| not required	| Returns a specified number of query items 
 
 | type              | String           | not required   | Returns businesses with a matching type value|<br> 
 
-◊ GET http://localhost:5133/api/businesses/tryjson?pagenumber=[ENTER-AN-INT-A-PAGE-NUMBER]&resultperpage=[ENTER-AN-INT-RESULTS-PER-PAGE]
+◊ GET http://localhost:5155/api/businesses/tryjson?pagenumber=[ENTER-AN-INT-A-PAGE-NUMBER]&resultperpage=[ENTER-AN-INT-RESULTS-PER-PAGE]
 name	    | String	| not required	 | Returns businesses with a matching type value 
 
-◊ GET http://localhost:5133/api/businesses?type=[ENTER-MATCHING-TYPE-VALUE]
+◊ GET http://localhost:5155/api/businesses?type=[ENTER-MATCHING-TYPE-VALUE]
 name	    | String	| not required	 | Returns businesses with a matching name value 
 
-◊ GET http://localhost:5133/api/businesses?name=[ENTER-MATCHING-NAME-VALUE]
+◊ GET http://localhost:5155/api/businesses?name=[ENTER-MATCHING-NAME-VALUE]
 minumumYearsInBusiness | Number	| not required  | Returns businesses that have a yearsinbusiness value that is greater than or equal to the specified minumumYearsInBusiness value
 
-◊ GET http://localhost:5133/api/businesses?minumumYearsInBusiness=[ENTER-MINIMUM-YEARS-IN-BUSINESS-INTEGER-VALUE]
+◊ GET http://localhost:5155/api/businesses?minumumYearsInBusiness=[ENTER-MINIMUM-YEARS-IN-BUSINESS-INTEGER-VALUE]
 type&minumumYearsInBusiness | String & Number | neither required	| Returns businesses with a matching type value and a yearsinbusiness value that is greater than or equal to the specified minumumYearsInBusiness value
 
-◊ GET http://localhost:5133/api/businesses?type=[ENTER-MATCHING-TYPE-VALUE]&minumumYearsInBusiness=[ENTER-MINIMUM-YEARS-IN-BUSINESS-INTEGER-VALUE]
+◊ GET http://localhost:5155/api/businesses?type=[ENTER-MATCHING-TYPE-VALUE]&minumumYearsInBusiness=[ENTER-MINIMUM-YEARS-IN-BUSINESS-INTEGER-VALUE]
 
-◊ POST request to http://localhost:5133/api/businesses/, must have a JSON body included when being made. Here is an example body in JSON:
+◊ POST request to http://localhost:5155/api/businesses/, must have a JSON body included when being made. Here is an example body in JSON:
 
 ```json 
 {
@@ -71,14 +71,14 @@ type&minumumYearsInBusiness | String & Number | neither required	| Returns busin
 
 ◊ PUT request we would send the previous body to:
 
-http://localhost:5133/api/businesses/1
+http://localhost:5155/api/businesses/1
 Notice that the value of businessId needs to match the id number in the URL. In this example, they are both 1.
 
 ## Pagination for the API
 
 Access the API endpoint with a query parameter that specifies the page that should be returned and the number of results per page. For example, the query string /records?page=2 might return page 2 of the results. This creates a page that does simple grouping.
 
-GET http://localhost:5133/api/business/api/tryjson/
+GET http://localhost:5155/api/business/api/tryjson/
 
 
 ## How To Run This Project
@@ -130,9 +130,8 @@ $ dotnet add package Newtonsoft.Json --version 13.0.2
 ```
 
 5. Update the database using the migrations in the  project. Open your shell (e.g., Terminal or GitBash) to the production directory, and run `dotnet ef database update`. 
-    - To optionally create a migration, remove any existing folders and/or run the command `dotnet ef migrations remove`.  Then, run the command `dotnet ef migrations add MigrationName` where `MigrationName` is your custom name for the migration in UpperCamelCase. To learn more about migrations, visit the LHTP lesson [Code First Development and Migrations](https://www.learnhowtoprogram.com/c-and-net-part-time/many-to-many-relationships/code-first-development-and-migrations).
 6. Within the production directory, run `dotnet watch run` in the command line to start the project in development mode with a watcher.
-4. Open the browser to _https://localhost:5133/swagger / localhost:5133/swagger/index.html. If you cannot access localhost:5133/swagger or localhost:5133/swagger/index.html it is likely because you have not configured a .NET developer security certificate for HTTPS. To learn about this, review this lesson: [Redirecting to HTTPS and Issuing a Security Certificate](https://www.learnhowtoprogram.com/lessons/redirecting-to-https-and-issuing-a-security-certificate).
+4. Open the browser to _https://localhost:5155/swagger / localhost:5155/swagger/index.html. If you cannot access localhost:5155/swagger or localhost:5155/swagger/index.html it is likely because you have not configured a .NET developer security certificate for HTTPS. To learn about this, review this lesson: [Redirecting to HTTPS and Issuing a Security Certificate](https://www.learnhowtoprogram.com/lessons/redirecting-to-https-and-issuing-a-security-certificate).
 
 ## Database Instructions 
 

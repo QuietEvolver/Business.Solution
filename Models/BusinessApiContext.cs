@@ -10,7 +10,6 @@ namespace BusinessApi.Models
 
     }
 
-    // DB SEED:
     protected override void OnModelCreating(ModelBuilder builder)
     {
       builder.Entity<Business>()
